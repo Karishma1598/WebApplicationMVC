@@ -1,0 +1,39 @@
+﻿@model IEnumerable<WebApplicationMVC.Models.Category>
+
+@{
+    ViewBag.Title = "Category List";
+}
+
+<h2>Category List</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Category ID</th>
+            <th>Category Name</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.CategoryId</td>
+                <td>@item.CategoryName</td>
+                <td>
+                    <a href="@Url.Action("Edit", new { id = item.CategoryId })" class="btn btn-primary">Edit</a>
+
+                    @using (Html.BeginForm("Delete", "Category", new { id = item.CategoryId }, FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Are you sure?');" />
+                    }
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<a href="@Url.Action("Create")" class="btn btn-primary">Add New Category</a>

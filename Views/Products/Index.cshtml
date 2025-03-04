@@ -1,0 +1,41 @@
+﻿@model IEnumerable<WebApplicationMVC.Models.Products>
+@{
+    int page = ViewBag.Page;
+    int pageSize = ViewBag.PageSize;
+    int totalRecords = ViewBag.TotalRecords;
+    int totalPages = (int)Math.Ceiling((double)totalRecords / pageSize);
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ProductId</th>
+            <th>ProductName</th>
+            <th>CategoryId</th>
+            <th>CategoryName</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ProductId</td>
+                <td>@item.ProductName</td>
+                <td>@item.CategoryId</td>
+               
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    @if (page > 1)
+    {
+        <a href="@Url.Action("Index", new { page = page - 1, pageSize })">Previous</a>
+    }
+    Page @page of @totalPages
+    @if (page < totalPages)
+    {
+        <a href="@Url.Action("Index", new { page = page + 1, pageSize })">Next</a>
+    }
+</div>

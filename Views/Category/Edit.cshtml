@@ -1,0 +1,18 @@
+﻿@model WebApplicationMVC.Models.Category
+
+@{
+    ViewBag.Title = "Edit Category";
+}
+
+<h2>Edit Category</h2>
+
+@using (Html.BeginForm("Edit", "Category", FormMethod.Post))
+{
+    @Html.HiddenFor(model => model.CategoryId)
+
+    <div>
+        <label>Category Name:</label>
+        @Html.TextBoxFor(model => model.CategoryName, new { @class = "form-control" })
+    </div>
+    <button type="submit">Update</button>
+}
