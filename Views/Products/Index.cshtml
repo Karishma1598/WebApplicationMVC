@@ -1,10 +1,13 @@
 ﻿@model IEnumerable<WebApplicationMVC.Models.Products>
-@{
+@{ 
     int page = ViewBag.Page;
     int pageSize = ViewBag.PageSize;
     int totalRecords = ViewBag.TotalRecords;
     int totalPages = (int)Math.Ceiling((double)totalRecords / pageSize);
 }
+<h2>Product List</h2>
+
+<a href="@Url.Action("Create")" class="btn btn-primary">Add New Product</a>
 
 <table class="table">
     <thead>
@@ -12,7 +15,8 @@
             <th>ProductId</th>
             <th>ProductName</th>
             <th>CategoryId</th>
-            <th>CategoryName</th>
+            <th>Actions</th>
+
         </tr>
     </thead>
     <tbody>
@@ -22,11 +26,19 @@
                 <td>@item.ProductId</td>
                 <td>@item.ProductName</td>
                 <td>@item.CategoryId</td>
-               
+                <td>
+                    <a href="@Url.Action("Edit", new { id = item.ProductId })" class="btn btn-primary">Edit</a>
+
+                    <a href="@Url.Action("Delete","Products", new {id = item.ProductId})" class="btn btn-danger">Delete</a>
+                </td>
+
+
             </tr>
         }
     </tbody>
 </table>
+
+
 
 <div>
     @if (page > 1)

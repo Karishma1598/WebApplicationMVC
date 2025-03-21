@@ -10,6 +10,7 @@ using System.Data.Entity;
 
 namespace WebApplicationMVC.Controllers
 {
+    [Route("Products")]
     public class ProductsController : Controller
     {
 
@@ -70,6 +71,7 @@ namespace WebApplicationMVC.Controllers
             return View(product);
         }
 
+        [Route("Products/Delete/{id}")]
         public ActionResult Delete(int id)
         {
             var product = db.Products.Find(id);
@@ -78,12 +80,22 @@ namespace WebApplicationMVC.Controllers
         }
 
         [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            
             var product = db.Products.Find(id);
+            if (product == null) return HttpNotFound();
             db.Products.Remove(product);
             db.SaveChanges();
             return RedirectToAction("Index");
+            /*
+
+            db.Entry(p).State=EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+            */
+
         }
     }
 }

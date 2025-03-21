@@ -6,6 +6,8 @@
 
 <h2>Category List</h2>
 
+<a href="@Url.Action("Create")" class="btn btn-primary">Add New Category</a>
+
 <table class="table">
     <thead>
         <tr>
@@ -22,12 +24,7 @@
                 <td>@item.CategoryName</td>
                 <td>
                     <a href="@Url.Action("Edit", new { id = item.CategoryId })" class="btn btn-primary">Edit</a>
-
-                    @using (Html.BeginForm("Delete", "Category", new { id = item.CategoryId }, FormMethod.Post))
-                    {
-                        @Html.AntiForgeryToken()
-                        <input type="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Are you sure?');" />
-                    }
+                    <a href="@Url.Action("Delete","Category", new { id = item.CategoryId })" class="btn btn-danger">Delete</a>
                 </td>
 
             </tr>
@@ -36,4 +33,4 @@
 </table>
 
 
-<a href="@Url.Action("Create")" class="btn btn-primary">Add New Category</a>
+

@@ -29,12 +29,12 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    <form asp-action="DeleteConfirmed" method="post">
         @Html.AntiForgeryToken()
+        <input type="hidden" name="id" value="@Model.ProductId" />
+        <input type="submit" value="Delete" class="btn btn-danger" />
+        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+    </form>
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
-    }
+
 </div>

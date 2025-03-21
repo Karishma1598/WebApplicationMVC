@@ -5,6 +5,7 @@ namespace WebApplicationMVC.Models
 {
     public class Category
     {
+        [Key]
         [Required(ErrorMessage ="Category id is required.")]
         public int CategoryId { get; set; }
 
